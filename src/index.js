@@ -7,4 +7,4 @@ console.log(someFunction('Jens'))
 
 const box = document.querySelector('#box')
 
-box.style.backgroundColor = 'blue'
+box.style.backgroundColor = 'red'
