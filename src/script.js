@@ -12,6 +12,10 @@ class Calculator {
     this.previousOperand = ''
     this.operation = undefined
   }
+
+  plusMinus() {
+    this.currentOperand = `-${this.currentOperand.toString()}`
+  }
   
   delete() {
     this.currentOperand = this.currentOperand.toString().slice(0, -1)
@@ -98,6 +102,7 @@ const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
 const deleteButton = document.querySelector('[data-delete]')
 const allClearButton = document.querySelector('[data-all-clear]')
+const plusMinusButton = document.querySelector('[data-plus-minus]')
 const previousOperandTextElement = document.querySelector('[data-previous-operand]')
 const currentOperandTextElement = document.querySelector('[data-current-operand]')
   
@@ -124,6 +129,11 @@ equalsButton.addEventListener('click', button => {
   
 allClearButton.addEventListener('click', button => {
   calculator.clear()
+  calculator.updateDisplay()
+})
+
+plusMinusButton.addEventListener('click', button => {
+  calculator.plusMinus()
   calculator.updateDisplay()
 })
   
