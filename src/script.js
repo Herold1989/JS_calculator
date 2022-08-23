@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 
 class Calculator {
@@ -6,7 +7,7 @@ class Calculator {
     this.currentOperandTextElement = currentOperandTextElement
     this.clear() // call on startup and clear screen
   }
-  
+
   clear() {
     this.currentOperand = ''
     this.previousOperand = ''
@@ -16,16 +17,16 @@ class Calculator {
   plusMinus() {
     this.currentOperand = `-${this.currentOperand.toString()}`
   }
-  
+
   delete() {
     this.currentOperand = this.currentOperand.toString().slice(0, -1)
   }
-  
+
   appendNumber(number) {
     if (number === '.' && this.currentOperand.includes('.')) return
     this.currentOperand = this.currentOperand.toString() + number.toString()
   }
-  
+
   chooseOperation(operation) {
     if (this.currentOperand === '') return
     if (this.previousOperand !== '') {
@@ -35,7 +36,7 @@ class Calculator {
     this.previousOperand = this.currentOperand
     this.currentOperand = ''
   }
-  
+
   compute() {
     let computation
     const prev = parseFloat(this.previousOperand)
@@ -63,7 +64,7 @@ class Calculator {
     this.operation = undefined
     this.previousOperand = ''
   }
-  
+
   getDisplayNumber(number) {
     const stringNumber = number.toString()
     const integerDigits = parseFloat(stringNumber.split('.')[0])
@@ -79,9 +80,27 @@ class Calculator {
     if (decimalDigits != null) {
       return `${integerDisplay}.${decimalDigits}`
     }
-    
+
     return integerDisplay
   }
+
+  handleKeyboardInput(e) {
+    if (e.key >= 0 && e.key <= 9) calculator.appendNumber(parseFloat(e.key))
+    if (e.key === '.') calculator.appendNumber(e.key)
+    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/')
+      calculator.chooseOperation(calculator.convertOperator(e.key))
+    if (e.key === '=' || e.key === 'Enter') calculator.compute()
+    if (e.key === 'Backspace') calculator.delete()
+    if (e.key === 'Escape') calculator.clear()
+  }
+
+  convertOperator(keyboardOperator) {
+    if (keyboardOperator === '/') return '÷'
+    if (keyboardOperator === '*') return 'x'
+    if (keyboardOperator === '-') return '-'
+    if (keyboardOperator === '+') return '+'
+  }
+  
 
   updateDisplay() {
     this.currentOperandTextElement.innerText =
@@ -95,8 +114,8 @@ class Calculator {
     }
   }
 }
-  
-  
+
+
 const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
@@ -105,9 +124,14 @@ const allClearButton = document.querySelector('[data-all-clear]')
 const plusMinusButton = document.querySelector('[data-plus-minus]')
 const previousOperandTextElement = document.querySelector('[data-previous-operand]')
 const currentOperandTextElement = document.querySelector('[data-current-operand]')
-  
+
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
-  
+
+document.addEventListener('keydown', button => {
+  calculator.handleKeyboardInput(button)
+  calculator.updateDisplay()
+})
+
 numberButtons.forEach(button => {
   button.addEventListener('click', () => {
     calculator.appendNumber(button.innerText)
@@ -126,7 +150,7 @@ equalsButton.addEventListener('click', button => {
   calculator.compute()
   calculator.updateDisplay()
 })
-  
+
 allClearButton.addEventListener('click', button => {
   calculator.clear()
   calculator.updateDisplay()
@@ -136,7 +160,7 @@ plusMinusButton.addEventListener('click', button => {
   calculator.plusMinus()
   calculator.updateDisplay()
 })
-  
+
 deleteButton.addEventListener('click', button => {
   calculator.delete()
   calculator.updateDisplay()
