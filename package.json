@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/Herold1989/JS_calculator/issues"
   },
-  "homepage": "https://herold1989.github.io/JS_calculator/",
+  "homepage": "https://herold1989.github.io/JS_calculator/src/index.html",
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
