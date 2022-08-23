@@ -1,5 +1,5 @@
 {
-  "name": "jens-boilerplate",
+  "name": "JS_calculator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rkahle/jens-boilerplate.git"
+    "url": "git+https://github.com/Herold1989/JS_calculator"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rkahle/jens-boilerplate/issues"
+    "url": "https://github.com/Herold1989/JS_calculator/issues"
   },
-  "homepage": "https://github.com/rkahle/jens-boilerplate#readme",
+  "homepage": "https://herold1989.github.io/JS_calculator/",
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
